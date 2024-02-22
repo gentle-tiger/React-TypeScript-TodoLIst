@@ -1,0 +1,162 @@
+.input {
+    display: flex;
+    width: 95%;
+    /*화면의 폭을 최대 90%만 사용할 수 있도록 설정 */
+    position: relative;
+    /*왜 이렇게 한건지 모르겠음*/
+    align-items: center;
+    /* 아직 의미르 모름. 없으나 마나임. 아직은. */
+}
+
+.input_box {
+    width: 100%;
+    border-radius: 50px;
+    border: none;
+    padding: 20px 30px;
+    font-size: 25px;
+    /*폰트를 키워서 폭을 넓힘. 굳이 input의 heigth를 건들이지 않아도 됨.*/
+    transform-origin: 0.2s;
+    /*??*/
+    box-shadow: inset 0 0 5px black;
+}
+
+.input_box:focus {
+    box-shadow: 0 0 10px 1000px rgb(0, 0, 0, 0.5);
+    outline: none;
+
+}
+
+.input__submit {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin: 12px;
+    border-radius: 50px;
+    border: none;
+    right: 0px;
+    /*input과 동일한 width를 가지고 있기 때문에 margin을 주고 오른쪽으로 붙이는 방식을 채택*/
+    font-size: 15px;
+    background-color: #2f74c0;
+    color: white;
+    transition: 0.2s all;
+    box-shadow: 0 0 5px black;
+}
+
+.input__submit:hover {
+    background-color: #388ae2;
+}
+
+.input__submit:active {
+    transform: scale(0.8);
+    box-shadow: 0 0 5px black;
+}
+
+.container {
+    display: flex;
+    width: 95%;
+    margin-top: 10px;
+    justify-content: space-between;
+    gap: 15px;
+    /*내가 직접 넣음. */
+    /*todos들 사이를 gap이 아닌 sapce-between으로 거리를 벌려줌.*/
+    /* align-items: flex-start; */
+}
+
+.todos {
+    display: flex;
+    width: 47.5%;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: rgb(50, 195, 205);
+    /* width: 90%; */
+    /*todos를 두 개로 분할 했기에 90%의 절반씩 가져간다.*/
+    /* flex-wrap: wrap; */
+    /* 여러줄로 나뉨. */
+
+}
+
+.todos__heading {
+    font-size: 30px;
+    color: white;
+    /* text-transform: uppercase; my thinking */
+}
+
+.todos__single {
+    display: flex;
+    /* width: 50%; 이걸 뺐음. */
+    border-radius: 5px;
+    padding: 20px;
+    margin: 15px;
+    background-image: url("https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg");
+    transition: 0.2s;
+}
+
+/*와 ... 이거 좋다...*/
+.todos__single:hover {
+    box-shadow: 0px 0px 5px black;
+    transform: scale(1.03);
+    /*1.03배 커지는 거*/
+}
+
+.todos__single--text {
+    flex: 1;
+    /*icon을 제외한 나머지 전부 text */
+    padding: 5px;
+    /* border: 1px solid red; */
+    border: none;
+    font-size: 20px;
+}
+
+.todos__single--text:focus {
+    outline: none;
+}
+
+/*내가 넣은 거 */
+.icons {}
+
+.icon {
+    display: flex;
+    margin-left: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+    .todos {
+        width: 45%
+    }
+}
+
+@media(max-width: 700px) {
+    .input {
+        width: 95%;
+    }
+
+    .todos {
+        width: 95%;
+        margin-bottom: 10px;
+        /*하단에 약간의 간격을 둠*/
+    }
+
+    .container {
+        width: 95%;
+        flex-direction: column;
+    }
+
+
+}
+
+.remove {
+    background-color: rgb(235, 103, 80);
+}
+.dragactive{
+    background-color: rgb(0,221,236);
+}
+.dragcomplete{
+    background-color: rgb(255,38,0);
+
+}
+.drag{
+    box-shadow: 0 0 20px black;
+}
