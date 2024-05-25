@@ -14,7 +14,7 @@ type Props = {
 }
 
 
-const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
+const SingleTodo = ({ index, todo, todos, setTodos}: Props) => {
 
     const [edit, setEdit] = useState<boolean>(false); // 편집모드가 켜져 있는지 여부에 관계없이 트랙을 유지(편집용)
     const [editTodo, setEditTodo] = useState<string>(todo.todo); // 편집기의 값을 유지함 (사용자가 클릭시 todo.todo로 이동함.)
@@ -24,6 +24,7 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
             todos.map((todo) =>
                 todo.id === id ? { ...todo, isDone: !todo.isDone } : todo)
         )
+            
     }
     const handleDelete = (id: number) => {
         setTodos(
@@ -31,6 +32,13 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
                 todo.id !== id ? { ...todo } : undefined
                 // todo.id !== id  // teacher
             ))
+            // const moveCompletedTodo = () =>{
+            //     const completed = todos.filter(todo => todo.isDone);
+            //     setCompletedTodos([...completedTodos, ...completed]);      
+            //     setTodos(todos.filter(todo => !todo.isDone));
+        
+            // }
+            
     }
 
     const handleEdit = (e: React.FormEvent<HTMLFormElement>, id: number) => {
@@ -48,7 +56,6 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
     }, [edit])
 
     const inputRef = useRef<HTMLInputElement>(null);
-
     return (
         <Draggable draggableId={todo.id.toString()} index={index}>
             {(provided, snapshot) => (
@@ -70,7 +77,6 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
                             (<span className="todos__single--text">{todo.todo}</span>)
                     }
 
-
                     <div className='icons'>
                         <span
                             className="icon"
@@ -80,7 +86,11 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
                                 }
                             }}><AiFillEdit />
                         </span>
-                        <span className="icon" onClick={() => handleDelete(todo.id)}><MdDone /></span>
+                        {todos.map(todo => todo.isDone === true ?
+                            <span className="icon" onClick={() => handleDelete(todo.id)}><MdDone color="red"/></span> :
+                            <span className="icon" onClick={() => handleDelete(todo.id)}><MdDone/></span>
+                            
+                            )}
                         <span className="icon" onClick={() => handleDone(todo.id)} > <AiFillDelete /></span >
                     </div >
                 </form >

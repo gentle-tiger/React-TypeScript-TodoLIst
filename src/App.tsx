@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import InputFeild from './components/InputFeild';
 import { Todo } from './model';
@@ -10,19 +10,25 @@ const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
-
+  const ref = useRef();
   const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (todo) { // todos는 배열이기에 배열을 나열한 후 해당 배열에 넣을 객체를 todos의 형식으로 만들어 todos 배열에 담는다. 
-      setTodos([...todos, { id: Date.now(), todo, isDone: false }]) // Date.now()메서드는 현재 시간을 반환한다. 
-      setTodo("");
-    }
+    if (todos.length < 8) {
+      e.preventDefault();
+      if (todo) { // todos는 배열이기에 배열을 나열한 후 해당 배열에 넣을 객체를 todos의 형식으로 만들어 todos 배열에 담는다. 
+        setTodos([...todos, { id: Date.now(), todo, isDone: false }]) // Date.now()메서드는 현재 시간을 반환한다. 
+        setTodo(""); // false는 기본값. 
+        // console.log(todos, completedTodos);
+      }
+    } else {
+      //  completed todolist를 삭ㄴ제하고 싶은데. 
+      }
   };
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
 
-    console.log(result);  // todo 목록을 다른 곳으로 이동시키면 destination의 값이 todoRemove 또는 index가 해당 칸의 값으로 바뀐다. 
+    // todo 목록을 다른 곳으로 이동시키면 destination의 값이 todoRemove 또는 index가 해당 칸의 값으로 바뀐다. 
+    // console.log(result);  
     if (!destination) return; // null(움직이지 않았다면) 그대로 종료한다. 
 
     if (

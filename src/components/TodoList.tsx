@@ -11,6 +11,11 @@ interface Props {
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>
 }
 const TodoList: React.FC<Props> = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props) => {
+    
+
+    
+    
+    
     return (
         <div className='container'>
             <Droppable droppableId="TodosList" >
@@ -20,7 +25,7 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, completedTodos, setComplet
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        <span className="todos__heading">Active Tasks</span>
+                        <span className="todos__heading" >Active Tasks <button>AAA</button></span>
                         {
                             todos.map((todo, index) => (
                                 <SingleTodo
@@ -29,6 +34,7 @@ const TodoList: React.FC<Props> = ({ todos, setTodos, completedTodos, setComplet
                                     todo={todo} // todo는 map을 돌면서 주는 것임. useState로 받는 것이 아님.
                                     todos={todos}
                                     setTodos={setTodos}
+
                                 />
                             ))
                         }
